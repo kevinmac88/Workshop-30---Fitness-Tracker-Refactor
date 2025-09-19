@@ -1,18 +1,22 @@
-import { deleteActivity } from "../api/activities";
 import { useState } from "react";
+import { deleteActivity } from "../api/activities";
 import { useAuth } from "../auth/AuthContext";
 
-export default function ActivityList({ activities }) {
+export default function ActivityList({ activities, syncActivities }) {
   return (
     <ul>
       {activities.map((activity) => (
-        <ActivityListItem key={activity.id} activity={activity} />
+        <ActivityListItem
+          key={activity.id}
+          activity={activity}
+          syncActivities={syncActivities}
+        />
       ))}
     </ul>
   );
 }
 
-function ActivityListItem({ activity }) {
+function ActivityListItem({ activity, syncActivities }) {
   const { token } = useAuth();
 
   const [error, setError] = useState(null);
@@ -22,6 +26,7 @@ function ActivityListItem({ activity }) {
 
     try {
       await deleteActivity(token, activity.id);
+      syncActivities();
     } catch (e) {
       setError(e.message);
     }
