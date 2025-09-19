@@ -1,4 +1,5 @@
 import { deleteActivity } from "../api/activities";
+import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 
 export default function ActivityList({ activities }) {
@@ -14,11 +15,15 @@ export default function ActivityList({ activities }) {
 function ActivityListItem({ activity }) {
   const { token } = useAuth();
 
+  const [error, setError] = useState(null);
+
   const tryDelete = async () => {
+    setError(null);
+
     try {
       await deleteActivity(token, activity.id);
     } catch (e) {
-      console.error(e);
+      setError(e.message);
     }
   };
 
@@ -26,6 +31,7 @@ function ActivityListItem({ activity }) {
     <li>
       <p>{activity.name}</p>
       {token && <button onClick={tryDelete}>Delete</button>}
+      {error && <p role="alert">{error}</p>}
     </li>
   );
 }
