@@ -6,8 +6,7 @@ account will be able to upload and manage their own activities.
 
 This information is accessible via [the Fitness Trackr API](https://fitnesstrac-kr.herokuapp.com/).
 
-This activity will guide you through reading some code that has already been written. It
-involves many of the techniques introduced previously, such as effects, context, and custom hooks.
+This activity will guide you through reading some code that has already been written.
 
 > [!TIP]
 >
@@ -16,8 +15,8 @@ involves many of the techniques introduced previously, such as effects, context,
 
 ## Navigating between different pages
 
-The app will render different components depending on which page is active. This logic is
-managed in `PageContext`.
+The app will render different components depending on which page is active.
+This logic is managed in `PageContext`.
 
 1. When the app first loads, what page does it start on?
 2. What are the four possible pages of `<App>`?
@@ -31,65 +30,41 @@ managed in `PageContext`.
 
 ## Handle user authentication
 
-Users can register for a new account, or log into an existing account. This logic is
-managed in `AuthContext`.
+Users can register for a new account, or log into an existing account.
+This logic is managed in `AuthContext`.
 
-8. What state does `AuthContext` manage? What value does it provide?
-9. Which API endpoint does the `register` function make a request to?
-10. What happens if the request is successful?
-11. How are the `register` and `login` functions different?
-12. What does it mean for a user to log out? What state is changed?
+8. What is the value of the `VITE_API` **environment variable**?
+
+> [!WARNING]
+>
+> The `example.env` is provided as an _example_, but the file must be renamed
+> to `.env` in order for the code to work.
+
+9. What state does `AuthContext` manage? What value does it provide?
+10. Which API endpoint does the `register` function make a request to?
+11. What happens if the request is successful?
+12. How are the `register` and `login` functions different?
+13. What does it mean for a user to log out? What state is changed?
 
 The `<Register>` and `<Login>` components use form actions to authenticate the user.
 
-13. What page is the user redirected to after they successfully register for an account?
-14. What happens if there's an error with registration?
-15. How are the `<Register>` and `<Login>` components different?
+14. What page is the user redirected to after they successfully register for an account?
+15. What happens if there's an error with registration?
+16. How are the `<Register>` and `<Login>` components different?
 
 ## Handle API communication
 
-The API will send back a token once the user successfully registers or logs in. We want to
-attach that token to any future requests to the API so that the user can access protected
-routes.
+The API will send back a token once the user successfully registers or logs in.
+We can use this token to authenticate the user in subsequent requests.
 
-There's a lot happening, so read through this portion very carefully!
+Before answering the following questions, read through the components in `activities/`.
 
-### useQuery and useMutation
-
-The API logic is managed in `ApiContext`, but the rest of our app will mostly be
-interacting with the API via two custom hooks: `useQuery` and `useMutation`.
-
-16. Let's start with `useQuery`. What is the purpose of the `data` state variable?
-17. What about `loading` and `error`? What do these state variables represent?
-18. What happens in the `finally` block of the `try..catch` statement?
-19. How often does the `useEffect` run, and what does it do?
-20. Where are `provideTag` and `request` coming from?
-21. What does the `useQuery` hook return?
-22. Now take a look at `useMutation`.
-    1. How are the parameters different from `useQuery`'s parameters?
-    2. How is the API request different from `useQuery`'s request?
-    3. What does `useMutation` return?
-
-### Reuse request logic
-
-Both `useQuery` and `useMutation` make requests to the API; this shared logic is kept in
-`ApiContext`.
-
-23. How does `ApiContext` use the token from `AuthContext`?
-24. `/json/` is an example of a **regular expression**, which are often used to _test_
-    if a pattern can be found in a string. How is it used in `request`?
-25. What does `request` return if the API call succeeds? What if it fails?
-26. In summary, defining `request` in `ApiContext` allows `useQuery` and `useMutation`
-    to share what logic and information?
-
-### Refresh queries automatically with tags
-
-**Tags** are a strategy used to ensure that our local application state stays up to date
-with the data on the server. Each query can provide a tag, and each mutation can invalidate a list of tags,
-which specify the queries that need to be refreshed after that mutation.
-
-27. In `ApiContext`, what is the initial value of the `tags` state variable?
-28. What does `useQuery` provide as arguments into `provideTag`?
-29. How does `provideTag` change the `tags` state?
-30. What argument does `useMutation` pass into `invalidateTags`?
-31. How does `invalidateTags` use the `tags` state?
+17. What error does `createActivity` in `api/activities.js` throw if the user is
+    not logged in?
+18. What error does `createActivity` throw if the activity is _not_ successfully created?
+19. How does `<ActivityForm>` handle thrown errors from `createActivity`?
+20. Where does `<ActivityForm>` get the token from to pass into `createActivity`?
+21. What would happen if `<ActivityForm>` does _not_ call `syncActivities` after
+    calling `createActivity`?
+22. Why does the `activities` state need to live in `<ActivitiesPage>` instead
+    of `<ActivityList>?`

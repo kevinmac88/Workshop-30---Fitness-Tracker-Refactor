@@ -9,6 +9,8 @@ export default function Register() {
   const [error, setError] = useState(null);
 
   const tryRegister = async (formData) => {
+    setError(null);
+
     const username = formData.get("username");
     const password = formData.get("password");
     try {
@@ -32,7 +34,7 @@ export default function Register() {
           <input type="password" name="password" required />
         </label>
         <button>Register</button>
-        {error && <output>{error}</output>}
+        {error && <p role="alert">{error}</p>}
       </form>
       <a onClick={() => setPage("login")}>
         Already have an account? Log in here.

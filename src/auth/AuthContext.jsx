@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react";
 
-import { API } from "../api/ApiContext";
+// import.meta.env allows us to access environment variables,
+// which are defined in a file named .env
+const API = import.meta.env.VITE_API;
 
 const AuthContext = createContext();
 
@@ -10,26 +12,26 @@ export function AuthProvider({ children }) {
   const register = async (credentials) => {
     const response = await fetch(API + "/users/register", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     });
     const result = await response.json();
-    if (!response.ok) throw result;
+    if (!response.ok) {
+      throw Error(result.message);
+    }
     setToken(result.token);
   };
 
   const login = async (credentials) => {
     const response = await fetch(API + "/users/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
     });
     const result = await response.json();
-    if (!response.ok) throw result;
+    if (!response.ok) {
+      throw Error(result.message);
+    }
     setToken(result.token);
   };
 

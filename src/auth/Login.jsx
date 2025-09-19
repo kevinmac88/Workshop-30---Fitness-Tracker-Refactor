@@ -9,6 +9,8 @@ export default function Login() {
   const [error, setError] = useState(null);
 
   const tryLogin = async (formData) => {
+    setError(null);
+
     const username = formData.get("username");
     const password = formData.get("password");
     try {
@@ -32,7 +34,7 @@ export default function Login() {
           <input type="password" name="password" required />
         </label>
         <button>Login</button>
-        {error && <output>{error}</output>}
+        {error && <p role="alert">{error}</p>}
       </form>
       <a onClick={() => setPage("register")}>Need an account? Register here.</a>
     </>
