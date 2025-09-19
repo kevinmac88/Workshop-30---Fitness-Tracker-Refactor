@@ -6,39 +6,27 @@ account will be able to upload and manage their own activities.
 
 This information is accessible via [the Fitness Trackr API](https://fitnesstrac-kr.herokuapp.com/).
 
-You should already have read through this starter code in an earlier activity. Now, your
-task is to build out the activities page!
-
 A [live demo of the finished project](https://fsa-fitness-trackr.netlify.app/) is available for you to reference.
 
 ## Requirements
 
-Build out components as you see fit to meet the following requirements. This will involve
-using the new `useQuery` and `useMutation` hooks for any requests to the API, as well as
-referencing the `token` from `AuthContext` to provide different features for users who are
-logged in.
+Build components as you see fit to meet the following requirements. This will involve
+writing new functions to send requests to the API and referencing the `token` from
+`AuthContext` to provide different features for users who are logged in.
 
-- On the "activities" page, all users can see a list of all activities from the API,
-  even if they are not logged in.
-- `useQuery` is used to fetch the activities from the API.
-- The `token` from `AuthContext` is used to check if a user is logged in.
-- If a user is logged in, they will additionally see a "delete" button next to each
-  activity.
-- If the user clicks the delete button for an activity but they are not authorized to delete that
-  activity, they will see a corresponding error message.
-- If the user clicks the delete button for an activity and they _are_ authorized to delete
-  that activity, that activity will be deleted.
-- `useMutation` is used to delete an activity via the API.
-- On the "activities" page, if a user is logged in, they will also see a form where they
-  can fill out information about a new activity.
-- If the user submits the form correctly, their new activity will be added to the API.
-- If something goes wrong with adding an activity, they will see a corresponding error message.
-- `useMutation` is used to add an activity via the API.
-
-> [!NOTE]
->
-> If `useQuery` and `useMutation` are used correctly, the list of activities will
-> automatically refresh after adding or deleting an activity!
+- A user can click on an activity in the list of activities to navigate
+  to a page with more details about that activity.
+- On the page with details about a single activity, a user sees the
+  name, creator, and description of the activity.
+- On the page with details about a single activity, a _logged-in_ user
+  sees a "delete" button.
+- If the user clicks the delete button for an activity,
+  but they are not authorized to delete that activity,
+  they will see a corresponding error message.
+- If the user clicks the delete button for an activity and
+  they _are_ authorized to delete that activity, that activity is deleted.
+- After an activity is successfully deleted, the user is automatically
+  redirected back to the list of all activities.
 
 > [!WARNING]
 >
