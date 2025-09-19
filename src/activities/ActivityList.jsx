@@ -1,3 +1,4 @@
+import { deleteActivity } from "../api/activities";
 import { useAuth } from "../auth/AuthContext";
 
 export default function ActivityList({ activities }) {
@@ -13,10 +14,18 @@ export default function ActivityList({ activities }) {
 function ActivityListItem({ activity }) {
   const { token } = useAuth();
 
+  const tryDelete = async () => {
+    try {
+      await deleteActivity(token, activity.id);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <li>
       <p>{activity.name}</p>
-      {token && <button>Delete</button>}
+      {token && <button onClick={tryDelete}>Delete</button>}
     </li>
   );
 }
