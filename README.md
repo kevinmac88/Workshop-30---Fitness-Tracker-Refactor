@@ -10,23 +10,18 @@ A [live demo of the finished project](https://fsa-fitness-trackr.netlify.app/) i
 
 ## Requirements
 
-Build components as you see fit to meet the following requirements. This will involve
-writing new functions to send requests to the API and referencing the `token` from
-`AuthContext` to provide different features for users who are logged in.
+Write code to meet the following requirements. You can always write
+new functions and build new components!
 
-- A user can click on an activity in the list of activities to navigate
-  to a page with more details about that activity.
-- On the page with details about a single activity, a user sees the
-  name, creator, and description of the activity.
-- On the page with details about a single activity, a _logged-in_ user
-  sees a "delete" button.
+- A _logged-in_ user will see a "delete" button next to each activity in the
+  list of activities.
 - If the user clicks the delete button for an activity,
   but they are not authorized to delete that activity,
   they will see a corresponding error message.
 - If the user clicks the delete button for an activity and
   they _are_ authorized to delete that activity, that activity is deleted.
-- After an activity is successfully deleted, the user is automatically
-  redirected back to the list of all activities.
+- After an activity is successfully deleted, the list of activities is
+  automatically updated.
 
 > [!WARNING]
 >
