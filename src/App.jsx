@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes, Navigate } from "react-router";
 import Layout from "./layout/Layout";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
@@ -15,6 +15,7 @@ export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
+        <Route index element={<Navigate to="/activities" replace />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/activities" element={<ActivitiesPage />} />
